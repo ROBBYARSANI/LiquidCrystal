@@ -74,6 +74,7 @@ public:
   void rightToLeft();
   void autoscroll();
   void noAutoscroll();
+  void printIcon(uint8_t location, const char *iconName);
 
   void setRowOffsets(int row1, int row2, int row3, int row4);
   void createChar(uint8_t, uint8_t[]);

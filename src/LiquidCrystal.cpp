@@ -236,7 +236,7 @@ void LiquidCrystal::cursor(bool enable)
 }
 
 // Turn on and off the blinking cursor
-void LiquidCrystal::noBlink(bool enable)
+void LiquidCrystal::blink(bool enable)
 {
   if (enable)
   {
@@ -296,6 +296,67 @@ void LiquidCrystal::createChar(uint8_t location, uint8_t charmap[])
   for (int i = 0; i < 8; i++)
   {
     write(charmap[i]);
+  }
+}
+
+void LiquidCrystal::printIcon(uint8_t location, const char *iconName)
+{
+  const uint8_t batteryIcon[8] = {
+      0b01110,
+      0b11111,
+      0b10001,
+      0b10001,
+      0b10001,
+      0b10001,
+      0b11111,
+      0b01110};
+
+  const uint8_t smileyIcon[8] = {
+      0b00000,
+      0b01010,
+      0b01010,
+      0b00000,
+      0b10001,
+      0b01110,
+      0b00000,
+      0b00000};
+
+  const uint8_t heartIcon[8] = {
+      0b00000,
+      0b01010,
+      0b11111,
+      0b11111,
+      0b01110,
+      0b00100,
+      0b00000,
+      0b00000};
+
+  // Match the icon name and generate the corresponding icon
+  if (strcmp(iconName, "battery") == 0)
+  {
+    createChar(location, batteryIcon);
+  }
+  else if (strcmp(iconName, "smile") == 0)
+  {
+    createChar(location, smileyIcon);
+  }
+  else if (strcmp(iconName, "heart") == 0)
+  {
+    createChar(location, heartIcon);
+  }
+  else
+  {
+    // Default or unknown icon (optional)
+    const uint8_t unknownIcon[8] = {
+        0b00000,
+        0b00000,
+        0b00000,
+        0b00000,
+        0b00000,
+        0b00000,
+        0b00000,
+        0b00000};
+    createChar(location, unknownIcon);
   }
 }
 
